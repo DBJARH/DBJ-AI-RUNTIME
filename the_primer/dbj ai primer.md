@@ -33,7 +33,7 @@ Model (abstract)
 
 ## The Harness
 
-![](harness/harness_arch_story/call-harness-model.png)
+![](assets/call-harness-model.png)
 
 >
 > &nbsp;

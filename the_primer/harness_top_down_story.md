@@ -4,7 +4,7 @@ version: 0.1
 
 ## Conceptual view: Why Harness
 
-![alt text](call-harness-model.png)
+![alt text](assets/call-harness-model.png)
 
 **To emulate normal conversation with Model. From Callers point of View**
 
@@ -14,13 +14,13 @@ version: 0.1
 
 By using the "Book" Concept, Model receives the full conversation context with each request.
 
-![alt text](call-harness-model-books.png)
+![alt text](assets/call-harness-model-books.png)
 
 Book = Full Calling Site Context + Original Prompt
 
 ### Harness Logic
 
-![alt text](calling_site_harnes_logic.png)
+![alt text](assets/calling_site_harnes_logic.png)
 
 Harness "duties"
 
@@ -31,7 +31,7 @@ Harness "duties"
 
 ## Physical View: Harness and the Runtime Environment
 
-![](harness-physical.png)
+![](assets/harness-physical.png)
 
 The Harness is a process running on the calling site. The calling site is a
 directory plus the host OS around it. The Model is remote and stateless.
