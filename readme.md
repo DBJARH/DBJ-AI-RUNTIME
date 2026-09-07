@@ -1,4 +1,6 @@
 
+# DBJ Primer on AI 
+
 ### Theoria mundi de architectorum
 
 Rough translation: "theory of the world, of/concerning the architects" — i.e., a *world-theory belonging to architects* or "the architects' worldview/theory of the world."
