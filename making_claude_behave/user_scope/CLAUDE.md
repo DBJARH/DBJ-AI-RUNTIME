@@ -211,6 +211,21 @@ This file itself is likewise a copy: authored at
 `.claude/user_scope/CLAUDE.md` in this repo, copied to `~/.claude/CLAUDE.md`.
 DBJ rejected a symlink. Edit the repo copy, then re-copy.
 
+## 8. Origin repo for shared mechanisms
+
+`DBJARH/DBJ-AI-RUNTIME` (`G:\REPOS\DBJARH\DBJ-AI-RUNTIME`) is the source repo
+for two mechanisms reused across DBJ's other repos:
+
+- `interlocuting/` — the agent-to-agent/human message bus (`to` script,
+  `colocutor_names.json`). Copied into other repos as `.colocuting/`; the
+  `to` script itself is usually left untracked in those copies.
+- `making_claude_behave/` — permission profiles
+  (`dbj_claude_permissions/`) and this file itself
+  (`making_claude_behave/user_scope/CLAUDE.md`).
+
+If either looks incomplete or out of date in a downstream repo, check here
+first — it's a copy, not broken.
+
 ---
 
 (c) 2026 by dbj@dbj.org | MIT license
