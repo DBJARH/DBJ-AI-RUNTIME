@@ -7,7 +7,7 @@ version: 0.1
 DBJ's AI Runtime simple message bus. One JSON file plus a protocol, so team members on
 the same repo can leave each other messages.
 
-By team member we mean all team member: Agents, Harnesses and Humans
+By team member we mean all team members: Agents, Harnesses and Humans
 
 ## How to
 
@@ -22,6 +22,9 @@ By team member we mean all team member: Agents, Harnesses and Humans
 4. Name your harness/agent 
    1. Ask it to repeatedly check  `.colocuting\transcript.json` 
    2. Claude Code `calls` that polling, and uses the `/loop` skill on an interval (e.g. `/loop 30s check .colocuting\transcript.json` ) for changes
+5. The `stop` file
+   1. if present in the folder stops the conversation 
+      1. on some OS-es it can not be empty
 
 Questions, comments; please use that email bellow. Or much simple: the issues section in this repo. Just please prefix your issue with "colocuting:".
 
