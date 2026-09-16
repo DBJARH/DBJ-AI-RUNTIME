@@ -1,0 +1,70 @@
+{
+  "permissions": {
+    "defaultMode": "plan",
+
+    "allow": [
+      "Read(//d/**)",
+      "Glob",
+      "Grep",
+
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(grep:*)",
+      "Bash(rg:*)",
+      "Bash(find:*)",
+      "Bash(wc:*)",
+      "Bash(file:*)",
+      "Bash(stat:*)",
+      "Bash(pwd)",
+
+      "Bash(git status:*)",
+      "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Bash(git show:*)",
+      "Bash(git branch:*)"
+    ],
+
+    "deny": [
+      "Edit",
+      "Write",
+      "NotebookEdit",
+      "WebFetch",
+      "Bash(rm:*)",
+      "Bash(mv:*)",
+      "Bash(cp:*)",
+      "Bash(mkdir:*)",
+      "Bash(touch:*)",
+      "Bash(chmod:*)",
+      "Bash(tee:*)",
+      "Bash(sed -i:*)",
+      "Bash(curl:*)",
+      "Bash(wget:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git checkout:*)",
+      "Bash(git merge:*)",
+      "Bash(git reset:*)",
+      "Bash(git clean:*)",
+      "Bash(gh:*)",
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(pip:*)",
+      "Bash(node:*)",
+      "PowerShell(Remove-Item:*)",
+      "PowerShell(Set-Content:*)",
+      "PowerShell(Out-File:*)",
+      "PowerShell(New-Item:*)",
+      "PowerShell(Start-Process:*)",
+      "Read(//**/.env)",
+      "Read(//**/.env.*)",
+      "Read(//**/id_rsa)",
+      "Read(//**/id_ed25519)",
+      "Read(//**/.aws/credentials)",
+      "Read(//**/.ssh/**)"
+    ],
+
+    "additionalDirectories": []
+  }
+}
