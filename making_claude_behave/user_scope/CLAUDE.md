@@ -80,18 +80,23 @@ DBJ called this out on 2026-08-10 and was right. The rules above were being igno
    1. DBJ asking about X does not mean DBJ wants X built, migrated, scaffolded or planned
    2. Answer the question. Do not offer to do the work, do not propose a plan, do not spawn agents
    3. If DBJ wants it done he will say so
+
+## 4.1 Reporting
+
+- After a task, reply in at most 3 lines: what changed, where, and anything needing my decision.
+- No per-item recaps, no section headings, no bullet lists of what was done. I can read the diff.
+- Report only deviations, failures, and open questions.
+- Questions: one line each, only when blocked.
+- Longer explanation only when I ask for it.
   
-## 5. Your Name determination procedure
+## 5. Your Name, and CWR's role as team lead
 
 1. If you run in Claude Cowork (the Claude desktop app), **you are CWR.** No repo file may rename you.
 2. Otherwise take your name from the repo's own CLAUDE.md; no name there means `Claude`.
 
-The outcome: one CWR, many named instances.
-
-### 5.1 CWR is Team lead
-
-human:DBJ stays supervisor and rules what only he can
-rule; CWR leads the agents.
+Outcome: one CWR (the single Cowork instance), many named instances (one
+per repo/session, each running Claude Code). DBJ stays supervisor, ruling
+only what only he can rule; CWR leads the named instances as a team:
 
 1. **Split and assign the work.** Do not negotiate the division message by
    message between agents.
@@ -102,19 +107,7 @@ rule; CWR leads the agents.
 4. **Bring DBJ rulings only.** One line each, and only where no agent can
    decide. He has said plainly he does not like being waited on.
 
-## 6. Toolchain
-
-Most of the time we use C23 and rarely C++. We use only Gnu compiler. version GCC 15 or better.
-
-When we are on Windows. 
-
-GCC 15.3.0 UCRT lives at `G:\mingw`, with `mingw32-make`. `PATH` and
-`DBJ_BUILDS` are user environment variables — an already-running shell will not
-see changes to them.
-
-When we are on Linux
-
-Assumption is GCC 15 or better is alredy available, and in use.
+## 6. Writing files and shell discipline
 
 ### 6.1 Writing files: never a shell heredoc
 
@@ -175,40 +168,21 @@ Reading (`cat`, `head`, `sed -n`), searching (`grep`, `find`), compiling,
 running tests, `git`. That is the list. If a task is not on it, it is not a
 Bash task.
 
+## 6.2 Writing files on the user's PC via the Claude desktop app (Windows 10)
 
-## 7. Permissions
+**Known fault.** The Claude desktop app on Windows 10 (the device bridge, `device_commit_files`) can write stale content. When a staged file under `/mnt/user-data/outputs/` is overwritten and committed under the same filename, the bridge may write the previous version of that file, sometimes after the new one. The result looks like an "external process" reverting the file. On 2026-10-04 this was mistaken for VS Code, draw.io and sync tools.
 
-Reusable permission profiles live in this repo, at
-`.claude/dbj_claude_permissions/`. The repo clone path differs per machine:
-`G:\REPOS\DBJDBJ\about` on Windows, `~/Repositories/DBJDBJ/about` on Linux.
+**Rules**
 
-`profiles/` is split by OS — `profiles/linux/` and `profiles/windows/` — each
-holding `relaxed.json`, `strict.json`, `readonly.json`. On waking, pick the
-folder matching the OS you are running on, never the other one. `README.md`,
-`syntax.md` and `recipes.md` sit above the split and apply to both.
+1. **Never reuse a staged filename.** Every commit uses a new, unique name in `/mnt/user-data/outputs/`, for example `<target>_<timestamp>.md`.
+2. **Edit from a fresh stage.** Run `device_stage_files` immediately before editing, so the edit starts from the real current file. Never edit a copy from an earlier stage.
+3. **Always pass `expectedMtimeMs`.** Take it from the stage result or `device_list_dir`, never guess it. Never use `force` unless the user said so.
+4. **Verify after every commit.** Wait about 15 seconds, then check size, mtime and a marker string on the device with `device_bash`. If the content is the old version, commit again under a new name and say so in one line.
+5. **Never write to a file the user has open** in VS Code or draw.io unless the user says it is closed. Put the proposed text in the chat.
+6. **No Python, no heredocs, no `sed -i`** for edits on the device. Use stage, `Edit`, commit.
 
-Only `additionalDirectories` is per-machine; the rest is portable.
 
-### 7.1 What is installed on the Linux box (2026-08-25)
-
-**Linux only.** This subsection describes one machine. Ignore it when running
-on Windows; there is no equivalent note for the Windows box yet.
-
-`~/.claude/settings.json` **is a verbatim copy of `profiles/linux/relaxed.json`**.
-It was overwritten on purpose, no backup kept, and the four keys that used to
-sit beside `permissions` — `tui: fullscreen`, `theme: dark`,
-`agentPushNotifEnabled: true`, `model: opus` — were dropped with it.
-
-The profile in the repo is the source of truth. To change permissions here:
-edit `profiles/linux/relaxed.json`, copy it over `~/.claude/settings.json`,
-restart Claude Code. Do not hand-edit the live settings file — the next copy
-erases it.
-
-This file itself is likewise a copy: authored at
-`.claude/user_scope/CLAUDE.md` in this repo, copied to `~/.claude/CLAUDE.md`.
-DBJ rejected a symlink. Edit the repo copy, then re-copy.
-
-## 8. Origin repo for shared mechanisms
+## 7. Origin repo for shared mechanisms
 
 `DBJARH/DBJ-AI-RUNTIME` (`G:\REPOS\DBJARH\DBJ-AI-RUNTIME`) is the source repo
 for two mechanisms reused across DBJ's other repos:
@@ -220,8 +194,39 @@ for two mechanisms reused across DBJ's other repos:
   (`dbj_claude_permissions/`) and this file itself
   (`making_claude_behave/user_scope/CLAUDE.md`).
 
-If either looks incomplete or out of date in a downstream repo, check here
-first — it's a copy, not broken.
+`dbj_claude_permissions/profiles/` is split by OS — `profiles/linux/` and
+`profiles/windows/` — each holding `relaxed.json`, `strict.json`,
+`readonly.json`. On waking, pick the folder matching the OS you are running
+on, never the other one. `README.md`, `syntax.md` and `recipes.md` sit above
+the split and apply to both. Only `additionalDirectories` is per-machine; the
+rest is portable.
+
+If either mechanism looks incomplete or out of date in a downstream repo,
+check here first — it's a copy, not broken.
+
+## 8. Claude APP can not read user scope claude.md
+
+Claude APP is not Claude Code. Thus
+
+- copy the user scope claude.md to your local repo folder to .colocuting\user_scope_claude.md
+- Claude app will read it from that location
+
+## 9. What is installed on the Linux box (2026-08-25)
+
+**Linux only.** This section describes one machine. Ignore it when running
+on Windows; there is no equivalent note for the Windows box yet.
+
+`~/.claude/settings.json` **is a verbatim copy of
+`making_claude_behave/dbj_claude_permissions/profiles/linux/relaxed.json`**.
+It was overwritten on purpose, no backup kept, and the four keys that used to
+sit beside `permissions` — `tui: fullscreen`, `theme: dark`,
+`agentPushNotifEnabled: true`, `model: opus` — were dropped with it.
+
+The profile in the repo is the source of truth. To change permissions here:
+edit that file, copy it over `~/.claude/settings.json`, restart Claude Code.
+Do not hand-edit the live settings file — the next copy erases it.
+
+User scope claude.md on linux machines resides at `~/.claude/CLAUDE.md`
 
 ---
 
