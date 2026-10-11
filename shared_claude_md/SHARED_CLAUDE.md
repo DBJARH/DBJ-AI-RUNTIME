@@ -117,8 +117,9 @@ description: >
    2. If either mechanism looks incomplete or out of date in a downstream repo, check here first — it's a copy, not broken
 11. Claude APP can not read user scope claude.md
     1. Claude APP is not Claude Code. Thus:
-       1. Copy the user scope claude.md to your local repo folder to .colocuting\user_scope_claude.md
+       1. it will use always and only G:\REPOS\DBJ-AI-RUNTIME\shared_claude_md\SHARED_CLAUDE.md
        2. Claude app will read it from that location
+       3. The Windows / Linux solution is simple and will come latter
 12. What is installed on the Linux box (2026-08-25)
     1. Linux only. This section describes one machine. Ignore it when running on Windows; there is no equivalent note for the Windows box yet
        1. Update this section to match the Linux folder/files
