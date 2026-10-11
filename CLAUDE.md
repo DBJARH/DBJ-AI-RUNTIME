@@ -47,6 +47,14 @@ version: 0.1
 
 SHOULD, not MUST: skip it where this repo forbids front matter, and where front matter already exists just add the `version` key without disturbing the rest.
 
+
+## on _deprecated
+
+- Deprecated content: a `_deprecated` folder, might appear, under any content section (e.g. `content/taxonomy/_deprecated/`) 
+  - The purpose is it is classified in place, committed and pushed to the repo
+    - but is excluded from the Hugo build via `ignoreFiles` in `hugo.toml` 
+      - The leading underscore marks "excluded from build," matching Hugo's own convention for non-content folders.
+
 ---
 
 (c) 2026 by dbj@dbj.org | MIT license
