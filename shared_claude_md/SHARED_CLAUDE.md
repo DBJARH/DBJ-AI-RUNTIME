@@ -1,14 +1,14 @@
 ---
-version: 0.1
+version: 1.1
 description: >
-  User-level memory for this machine. Loaded into every Claude Code session,
-  in every folder, for every repo. Put here ONLY facts that hold for the user
-  across all work — never project-specific memories. Those belong in the
-  per-project store at ~/.claude/projects/<flattened-project-path>/memory/.
-  Keep this file short: it is loaded in full, every time.
+  shared rules (not memory) for claude agents this machine. Put here ONLY facts that hold for the claude agents across all work — never project-specific memories. Keep this file short: it is loaded in full, every time.
 ---
 
-# CLAUDE.md — per-user
+1. shared memories
+2. those belong in the
+  per-project store at ~/.claude/projects/<flattened-project-path>/memory/.
+
+# SHARED_CLAUDE.md
 
 ## 1. Owner: DBJ
 
@@ -24,6 +24,7 @@ Dusan B. Jovanovic (DBJ), dbjdbj@gmail.com
 ```
        G:\repos\<organization name>\<repo name>
 ```
+- cloned DBJARH/DBJ-AI-RUNTIME has special place in G:\REPOS\DBJ-AI-RUNTIME
 
 ## 3. Conversation protocol
 
@@ -184,49 +185,49 @@ Bash task.
 
 ## 7. Origin repo for shared mechanisms
 
-`DBJARH/DBJ-AI-RUNTIME` (`G:\REPOS\DBJARH\DBJ-AI-RUNTIME`) is the source repo
-for two mechanisms reused across DBJ's other repos:
+`DBJARH/DBJ-AI-RUNTIME` (special local place: `G:\REPOS\DBJ-AI-RUNTIME`) is the source repo
+for reused across all DBJ's other repos:
 
-- `interlocuting/` — the agent-to-agent/human message bus (`to` script,
-  `colocutor_names.json`). Copied into other repos as `.colocuting/`; the
-  `to` script itself is usually left untracked in those copies.
-- `making_claude_behave/` — permission profiles
-  (`dbj_claude_permissions/`) and this file itself
-  (`making_claude_behave/user_scope/CLAUDE.md`).
-
-`dbj_claude_permissions/profiles/` is split by OS — `profiles/linux/` and
-`profiles/windows/` — each holding `relaxed.json`, `strict.json`,
-`readonly.json`. On waking, pick the folder matching the OS you are running
-on, never the other one. `README.md`, `syntax.md` and `recipes.md` sit above
-the split and apply to both. Only `additionalDirectories` is per-machine; the
-rest is portable.
+- `dbj_inter_agent_messaging/` — the agent-to-agent/human message bus 
+  - Copied into other repos as `.colocuting/`; 
+    - the `to` script itself is usually left untracked in those copies.
+- `dbj_claude_permissions/` — permission profiles.
+  - `dbj_claude_permissions/` is split by OS — `profiles/linux/` and `profiles/windows/` — each holding relaxed.json`, `strict.json`,`readonly.json`. 
+  - On waking, pick the folder matching the OS you are running on, never the other one. `README.md`, `syntax.md` and `recipes.md` sit above the split and apply to both. Only `additionalDirectories` is per-machine; the rest is portable.
 
 If either mechanism looks incomplete or out of date in a downstream repo,
 check here first — it's a copy, not broken.
 
 ## 8. Claude APP can not read user scope claude.md
 
-Claude APP is not Claude Code. Thus
-
-- copy the user scope claude.md to your local repo folder to .colocuting\user_scope_claude.md
-- Claude app will read it from that location
+- **Claude APP is not Claude Code**. Thus
+  - copy the user scope claude.md to your local repo folder to .colocuting\user_scope_claude.md
+  - Claude app will read it from that location
 
 ## 9. What is installed on the Linux box (2026-08-25)
 
 **Linux only.** This section describes one machine. Ignore it when running
 on Windows; there is no equivalent note for the Windows box yet.
 
-`~/.claude/settings.json` **is a verbatim copy of
-`making_claude_behave/dbj_claude_permissions/profiles/linux/relaxed.json`**.
-It was overwritten on purpose, no backup kept, and the four keys that used to
-sit beside `permissions` — `tui: fullscreen`, `theme: dark`,
-`agentPushNotifEnabled: true`, `model: opus` — were dropped with it.
+- update this section to match the Linux folder/files
+  - be very bried
+  - User scope claude.md on linux machines resides at `~/.claude/CLAUDE.md`
 
-The profile in the repo is the source of truth. To change permissions here:
-edit that file, copy it over `~/.claude/settings.json`, restart Claude Code.
-Do not hand-edit the live settings file — the next copy erases it.
+## Document versioning
 
-User scope claude.md on linux machines resides at `~/.claude/CLAUDE.md`
+- Every markdown file **SHOULD** (not must) carry a decimal `version:` key in its front matter:
+
+```yaml
+---
+version: 0.1
+---
+```
+
+- `0.1` .. `1.0` — pre-releases leading up to release 1
+- `1.1` .. `2.0` — releases 1.1 through 2.0
+- and so on by the same pattern
+
+SHOULD, not MUST: skip it where this repo forbids front matter, and where front matter already exists just add the `version` key without disturbing the rest.
 
 ---
 
