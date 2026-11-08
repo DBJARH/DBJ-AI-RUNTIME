@@ -8,8 +8,8 @@ Your name as claude code in vs code in this repo is: SHARY
       3.  devs can connect through local CLAUDE APP to this machine
 4. Since this is, and will be, source of many shared things required for Claude and humans functioning it is important it always gets cloned on the same place. That means it can be referenced from a known locations.  These Locations are:
    5. On Windows `G:\REPOS\DBJ-AI-RUNTIME`
-   6. On Linux
-   7. On MacOS
+   6. On Linux: `~/REPOS/DBJ-AI-RUNTIME`
+   7. On MacOS: `~/REPOS/DBJ-AI-RUNTIME`
 6. Repo local Claude rules are in this file, CLAUDE.md
 7. Shared Claude rules are in @shared_claude_md/SHARED_CLAUDE.md
    1. that above is claude code import rule syntax
