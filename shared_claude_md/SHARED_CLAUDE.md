@@ -110,7 +110,8 @@ description: >
 10. Origin repo for shared mechanisms
    1. `DBJARH/DBJ-AI-RUNTIME` (special local place: `G:\REPOS\DBJ-AI-RUNTIME`) is the source repo for reused across all DBJ's other repos:
       1. `dbj_inter_agent_messaging/` — the agent-to-agent/human message bus
-         1. Copied into other repos as `.colocuting/`; the `to` script itself is usually left untracked in those copies
+         1. In a repo, `.colocuting/` is where agents and humans leave each other messages. They are kept in `transcript.json`, which only the `to` script writes
+         2. Copied into other repos as `.colocuting/`; the `to` script itself is usually left untracked in those copies
       2. `dbj_claude_permissions/` — permission profiles
          1. `dbj_claude_permissions/` is split by OS — `profiles/linux/` and `profiles/windows/` — each holding `relaxed.json`, `strict.json`, `readonly.json`
          2. On waking, pick the folder matching the OS you are running on, never the other one. `README.md`, `syntax.md` and `recipes.md` sit above the split and apply to both. Only `additionalDirectories` is per-machine; the rest is portable
