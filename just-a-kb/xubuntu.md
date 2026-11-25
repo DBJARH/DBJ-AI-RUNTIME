@@ -22,6 +22,8 @@ User dislikes Xfce fading inactive windows. Fix: override Greybird's `:backdrop`
 
 Titlebar buttons (minimize/maximize/close) are too small under Greybird at this DPI. Fix: Settings > Window Manager > Style tab — button size scales with the "Title font" size and with the chosen theme. User tried Default-hdpi, Default-xhdpi, Numix; settled on **Default-xhdpi**.
 
+That theme also enlarges the leftmost window-menu icon button (same scale as min/max/close). Fix: Style tab > Button layout — drag that icon button from "Active" to "Hidden". Keeps big min/max/close, drops the oversized icon.
+
 ## Screenshot shortcut
 
 `Shift+Super+S` → `xfce4-screenshooter -r -c` (region capture to clipboard, Windows-style). Bind under Settings > Keyboard > Application Shortcuts.
