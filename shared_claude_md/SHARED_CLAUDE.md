@@ -112,6 +112,9 @@ description: >
       1. `dbj_inter_agent_messaging/` — the agent-to-agent/human message bus
          1. In a repo, `.colocuting/` is where agents and humans leave each other messages. They are kept in `transcript.json`, which only the `to` script writes
          2. Copied into other repos as `.colocuting/`; the `to` script itself is usually left untracked in those copies
+         3. See `.colocuting/README.md` in the repo for the simple guide
+         4. `.colocuting/v_kanban.md` is a to-do list table: each line is a timestamp id, a status, and a description
+         5. Skill findings reports (e.g. `/buyer-fit`, `/method-fit`) go in `.colocuting/skill_reports/`, named `YYYY-MM-DD-HH-MM-<skill-name>.md`, timestamped to when the report was produced
       2. `dbj_claude_permissions/` — permission profiles
          1. `dbj_claude_permissions/` is split by OS — `profiles/linux/` and `profiles/windows/` — each holding `relaxed.json`, `strict.json`, `readonly.json`
          2. On waking, pick the folder matching the OS you are running on, never the other one. `README.md`, `syntax.md` and `recipes.md` sit above the split and apply to both. Only `additionalDirectories` is per-machine; the rest is portable
